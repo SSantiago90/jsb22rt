@@ -1,8 +1,16 @@
-# React + Vite
+# HackABoss - jsb22rt
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Clase 1
 
-Currently, two official plugins are available:
+### Enlaces útiles
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Documentación de React (Legacy)](https://legacy.reactjs.org/)
+- [Documentación oficial de React](https://www.w3schools.com/js/js_es6.asp)
+- [ECMAScript 6](https://www.w3schools.com/js/js_es6.asp)
+- [JSX](https://es.react.dev/learn/writing-markup-with-jsx)
+- [Create React App](https://create-react-app.dev/)
+- [Vite](https://vitejs.dev/)
+
+## Clase 2
+
+_Próximamente..._
