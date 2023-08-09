@@ -1,0 +1,9 @@
+.image-rounded {
+  width: 125px;
+  border-radius: 100%;
+}
+
+.image-squared {
+  width: 125px;
+  border-radius: 5px;
+}

@@ -1,40 +1,37 @@
 import "./App.css";
-
-function FooterPersonalizado() {
-  return <footer>Soy un footer!</footer>;
-}
+import Button from "./components/clase_02/Button";
+import Image from "./components/clase_02/Image";
+import ImageClass from "./components/clase_02/Image_class";
+import UsersList from "./components/clase_02/UsersList";
 
 function App() {
-  function getUser() {
-    return { username: "Juan", favColor: "orange" };
+  function handleContact() {
+    alert("Serás redirigido a /contacto");
   }
 
-  // camelCase esEscrbirConEstaSintaxis
-  const stylesH1 = {
-    color: getUser().favColor,
-    backgroundColor: "black",
-    marginTop: "50px",
-    padding: "20px",
-  };
-
-  function handleClick() {
-    alert("Gracias por visitar mi web");
+  function handleServices() {
+    alert("Serás redirigido a /services");
   }
 
-  // inline styles
   return (
     <>
-      <h1 style={stylesH1}>Bienvenido {getUser().username}</h1>
-      <button onClick={handleClick} id="vermas-btn">
-        Ver más
-      </button>
-      <p className="read-the-docs">
-        Mi primer app en Vite
-        <br />
-        <img src="https://place-hold.it/300x400" />
-      </p>
-      <h2> {1 + 2 + 19} </h2>
-      <FooterPersonalizado />
+      <ImageClass imgurl="/assets/avatar-man.jpg" />
+      <h1>Clase 2 Componentes</h1>
+      <Image
+        imgurl="https://res.cloudinary.com/practicaldev/image/fetch/s--fced_LNQ--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/i/1zg83mt0lo13dfmff1cr.png"
+        alt="wellcome img"
+        circled={false}
+      />
+
+      <UsersList />
+      <Button
+        onTouch={handleServices}
+        color="lightblue"
+        label="Conoce nuestros servicios"
+      />
+      <Button onTouch={handleContact} color="purple" label="Contactanos" />
+      {/* Button( { label: "Contactanos"}) */}
+      <Button onTouch={1} color="red" label="no funciono" />
     </>
   );
 }

@@ -1,8 +1,8 @@
 # HackABoss - jsb22rt
 
-## Clase 1
+### Clase 1: Introducción a React, Creación de entorno de desarrollo y JSX
 
-### Enlaces útiles
+#### Enlaces útiles
 
 - [Documentación de React (Legacy)](https://legacy.reactjs.org/)
 - [Documentación oficial de React](https://www.w3schools.com/js/js_es6.asp)
