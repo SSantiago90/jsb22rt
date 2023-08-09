@@ -30,8 +30,6 @@ function App() {
         label="Conoce nuestros servicios"
       />
       <Button onTouch={handleContact} color="purple" label="Contactanos" />
-      {/* Button( { label: "Contactanos"}) */}
-      <Button onTouch={1} color="red" label="no funciono" />
     </>
   );
 }

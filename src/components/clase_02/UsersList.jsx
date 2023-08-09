@@ -67,7 +67,7 @@ function UsersList() {
   ];
 
   return (
-    <ul>
+    <ul className="users-list">
       {users.map((elem) => (
         <Profile key={elem.id} {...elem} />
       ))}
