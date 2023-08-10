@@ -1,35 +1,23 @@
 import "./App.css";
-import Button from "./components/clase_02/Button";
-import Image from "./components/clase_02/Image";
+import ButtonChilds from "./components/clase_03/Button2";
+import BlogContainer from "./components/clase_03/BlogContainer";
 import ImageClass from "./components/clase_02/Image_class";
-import UsersList from "./components/clase_02/UsersList";
+import Counter from "./components/clase_03/Counter";
+import TodoList from "./components/clase_03/TodoList";
 
 function App() {
-  function handleContact() {
-    alert("Serás redirigido a /contacto");
-  }
-
-  function handleServices() {
-    alert("Serás redirigido a /services");
-  }
-
   return (
     <>
-      <ImageClass imgurl="/assets/avatar-man.jpg" />
-      <h1>Clase 2 Componentes</h1>
-      <Image
-        imgurl="https://res.cloudinary.com/practicaldev/image/fetch/s--fced_LNQ--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/i/1zg83mt0lo13dfmff1cr.png"
-        alt="wellcome img"
-        circled={false}
-      />
-
-      <UsersList />
-      <Button
-        onTouch={handleServices}
-        color="lightblue"
-        label="Conoce nuestros servicios"
-      />
-      <Button onTouch={handleContact} color="purple" label="Contactanos" />
+      <h1>Clase 3 State</h1>
+      <ImageClass imgurl="http://placekitten.com/200/300" circled={true} />
+      <BlogContainer />
+      <br />
+      <br />
+      <TodoList />
+      <ButtonChilds onTouch={() => console.log("modificando color con state")}>
+        Cambio de color
+      </ButtonChilds>
+      <Counter max={6} />
     </>
   );
 }

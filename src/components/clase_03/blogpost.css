@@ -1,0 +1,7 @@
+.like-button {
+  display: none;
+}
+
+.blogpost:hover .like-button {
+  display: block;
+}

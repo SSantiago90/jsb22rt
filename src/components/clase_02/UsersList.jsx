@@ -1,5 +1,6 @@
 import "./userslist.css";
 import Profile from "./Profile";
+import Flex from "../clase_03/Flex";
 
 function UsersList() {
   const users = [
@@ -67,11 +68,11 @@ function UsersList() {
   ];
 
   return (
-    <ul className="users-list">
+    <Flex inColumns={false}>
       {users.map((elem) => (
         <Profile key={elem.id} {...elem} />
       ))}
-    </ul>
+    </Flex>
   );
 }
 

@@ -1,18 +1,15 @@
 import PropTypes from "prop-types";
 
-function Button({ onTouch, color, label }) {
-  /* console.log(props); */
-
+function Button({ onTouch, color = "#050505", label = "Click aquí" }) {
   const styleBtn = {
-    backgroundColor: color || "black",
+    backgroundColor: color,
   };
 
   return (
     <button onClick={onTouch} style={styleBtn}>
-      {label || "Click aquí"}
+      {label}
     </button>
   );
-  // falsy/truthy
 }
 
 Button.propTypes = {
