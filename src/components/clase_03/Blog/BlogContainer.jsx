@@ -1,5 +1,6 @@
 import { useState } from "react";
 import BlogPost from "./BlogPost";
+import { FallingLines } from "react-loader-spinner";
 
 function BlogContainer() {
   const [isLoading, setIsLoading] = useState(true);
@@ -91,7 +92,15 @@ function BlogContainer() {
     },
   ];
 
-  if (isLoading) return <h2>Loading...</h2>;
+  if (isLoading)
+    return (
+      <FallingLines
+        color="#4fa94d"
+        width="100"
+        visible={true}
+        ariaLabel="falling-lines-loading"
+      />
+    );
 
   return (
     <div>

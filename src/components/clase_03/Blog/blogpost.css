@@ -16,8 +16,12 @@
   text-align: center;
   margin: 10px 36px 24px;
   transition: all ease-in-out 225ms;
+  border: none;
 }
 
+.blogpost.favorite {
+  border: solid 2px #ab62ff;
+}
 .blogpost h2 {
   font-size: 42px;
   color: #c4a9e3;

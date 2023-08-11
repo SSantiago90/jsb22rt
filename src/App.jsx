@@ -5,6 +5,7 @@ import ImageClass from "./components/clase_02/Image_class";
 import Counter from "./components/clase_03/UI/Counter";
 import TodoList from "./components/clase_03/TodoList/TodoList";
 import { useState } from "react";
+import LoginForm from "./components/clase_04/LoginForm";
 
 function App() {
   const [hideCounter, setHideCounter] = useState(false);
@@ -86,7 +87,16 @@ function App() {
                   handlePageChange("asdsda");
                 }}
               >
-                Todo List
+                No existe
+              </ButtonChilds>
+            </li>
+            <li>
+              <ButtonChilds
+                onTouch={() => {
+                  handlePageChange("login");
+                }}
+              >
+                Login
               </ButtonChilds>
             </li>
           </ul>
@@ -108,6 +118,10 @@ function App() {
         </ButtonChilds>
       </>
     );
+  }
+
+  if (activePage === "login") {
+    return <LoginForm />;
   }
 
   return <h1>No encontramos lo que buscabas</h1>;

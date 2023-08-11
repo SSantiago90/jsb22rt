@@ -1,11 +1,20 @@
 import PropTypes from "prop-types";
 import ToggleButton from "../UI/ToggleButton";
 import "./blogpost.css";
-
+import { useState } from "react";
 function BlogPost({ title, tags = [], footer, children }) {
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  function onToggle(value) {
+    setIsFavorite(value);
+  }
+
   return (
-    <article className="blogpost">
-      <ToggleButton className="like-button">❤</ToggleButton>
+    <article className={`blogpost ${isFavorite && "favorite"}`}>
+      <ToggleButton onToggle={onToggle} className="like-button">
+        ❤
+      </ToggleButton>
+
       <h2>{title}</h2>
       <ul className="blogpost_tags">
         {tags.map((tag) => (
