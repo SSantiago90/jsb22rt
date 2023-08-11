@@ -1,0 +1,67 @@
+.like-button {
+  transition: all ease-in 225ms;
+  display: none;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  top: 10px;
+  right: 10px;
+  border-radius: 50%;
+}
+
+.blogpost {
+  position: relative;
+  max-width: 1020px;
+  padding: 12px 42px 48px;
+  text-align: center;
+  margin: 10px 36px 24px;
+  transition: all ease-in-out 225ms;
+}
+
+.blogpost h2 {
+  font-size: 42px;
+  color: #c4a9e3;
+}
+
+.blogpost p {
+  text-align: justify;
+}
+
+.blogpost:hover .like-button {
+  display: block;
+}
+
+.blogpost:hover {
+  background-color: #202020;
+}
+
+.blogpost_tags {
+  cursor: pointer;
+  margin: 4px auto 12px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.blogpost_tags li {
+  background-color: #414141;
+  padding: 4px 6px;
+  border-radius: 6px;
+  color: #b4b4b4;
+  font-size: 12px;
+}
+
+.blogpost_footer {
+  color: #808080;
+  margin: 42px 8px 8px;
+}
+
+.blogpost_footer:after {
+  content: "";
+  width: 20%;
+  background-color: #c4a9e3;
+  height: 2px;
+  display: block;
+  margin: 20px auto 5px;
+}
