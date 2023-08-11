@@ -1,9 +1,11 @@
 .image-rounded {
-  width: 125px;
   border-radius: 100%;
+  width: 100%;
+  height: auto;
+  max-width: 420px;
 }
 
 .image-squared {
-  width: 125px;
   border-radius: 5px;
 }
+/* css modules */
