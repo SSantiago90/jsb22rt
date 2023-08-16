@@ -6,6 +6,8 @@ import Counter from "./components/clase_03/UI/Counter";
 import TodoList from "./components/clase_03/TodoList/TodoList";
 import { useState } from "react";
 import LoginForm from "./components/clase_04/LoginForm";
+import Chat from "./components/clase_05/Chat";
+import Timer from "./components/clase_05/Timer";
 
 function App() {
   const [hideCounter, setHideCounter] = useState(false);
@@ -49,6 +51,22 @@ function App() {
     );
   }
 
+  if (activePage === "chat") {
+    return (
+      <div>
+        <h1>Chat</h1>
+        <Chat></Chat>
+        <ButtonChilds
+          onTouch={() => {
+            handlePageChange("home");
+          }}
+        >
+          Volver
+        </ButtonChilds>
+      </div>
+    );
+  }
+
   if (activePage === "home") {
     return (
       <>
@@ -61,6 +79,15 @@ function App() {
                 }}
               >
                 Homepage
+              </ButtonChilds>
+            </li>
+            <li>
+              <ButtonChilds
+                onTouch={() => {
+                  handlePageChange("chat");
+                }}
+              >
+                Chat
               </ButtonChilds>
             </li>
             <li>
@@ -103,10 +130,9 @@ function App() {
         </nav>
 
         <h1>Clase 4 Eventos & Renderizado Condicional</h1>
-        <ImageClass imgurl="http://loremflickr.com/300/300" circled={true} />
 
-        <TodoList />
         <BlogContainer />
+        <TodoList />
         <ButtonChilds
           onTouch={() => console.log("modificando color con state")}
         >
@@ -116,6 +142,7 @@ function App() {
         <ButtonChilds onTouch={handleHideCounter}>
           Ocultar contador
         </ButtonChilds>
+        <Timer />
       </>
     );
   }

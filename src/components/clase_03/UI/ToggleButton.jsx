@@ -1,26 +1,27 @@
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 import "./togglebutton.css";
-import PropTypes from "prop-types";
 
-function ToggleButton({ className, children, onToggle }) {
-  const [isOn, setIsOn] = useState(true);
+const ToggleButtonForwardRef = forwardRef(function ToggleButton(
+  { className, initial, children, onToggle },
+  ref
+) {
+  const [isOn, setIsOn] = useState(initial);
   const classNameBtn = isOn ? "toggle-button active" : "toggle-button";
 
   function handleClick() {
     setIsOn(!isOn);
-    onToggle(isOn);
+    onToggle(!isOn);
   }
 
   return (
-    <button className={`${classNameBtn} ${className}`} onClick={handleClick}>
+    <button
+      ref={ref}
+      className={`${classNameBtn} ${className}`}
+      onClick={handleClick}
+    >
       {children}
     </button>
   );
-}
+});
 
-ToggleButton.propTypes = {
-  children: PropTypes.element.isRequired,
-  className: PropTypes.string,
-};
-
-export default ToggleButton;
+export default ToggleButtonForwardRef;

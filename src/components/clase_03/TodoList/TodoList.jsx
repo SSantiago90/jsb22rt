@@ -5,13 +5,10 @@ import "./todolist.css";
 
 function TodoList() {
   const [tasks, setTasks] = useState([
-    { id: 3, text: "Sumar algo de CSS a la app🎨", completed: true },
-    { id: 2, text: "2. Reorden de componentes🗂️", completed: true },
-    { id: 4, text: "Estilizar componente Task🌈", completed: false },
-    { id: 1, text: " Fix imagen_class css🐞", completed: false },
+    { id: 3, text: "Recapitulación de contenido", completed: false },
     {
-      id: 5,
-      text: "Clase de Eventos y Rendering Condicional💻",
+      id: 2,
+      text: "Limpieza de proyecto y revisión de errores",
       completed: false,
     },
   ]);
@@ -79,6 +76,6 @@ function Task({ onClick, text, completed = true }) {
 Task.propTypes = {
   onClick: PropTypes.func,
   text: PropTypes.string,
-  completed: PropTypes.boolean,
+  completed: PropTypes.bool,
 };
 export default TodoList;

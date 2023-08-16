@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Counter({ max }) {
   let [count, setCount] = useState(1);
+
   // Regla del estado: No mutar el estado directamente
-  console.log("el comp se actualizó!");
+  console.log("%cel comp se actualizó!", "background-color: blue");
+
+  useEffect(function mountingEffect() {
+    console.log("%cel comp fué montado.", "background-color: green");
+  }, []);
+  // [] Array de dependencias
 
   function handleAdd() {
     //setCount( count + 1);

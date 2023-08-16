@@ -23,3 +23,13 @@
 - [El estado como una instantánea](https://es.react.dev/learn/state-as-a-snapshot)
 - [El estado como memoria de un componente](https://es.react.dev/learn/state-a-components-memory)
 - [Múltiples actualizaciones de estado en cola](https://es.react.dev/learn/queueing-a-series-of-state-updates)
+
+### Clase 5
+
+- [React Ilustrado](https://maggieappleton.com/reactpotato)
+- [Mapa de React](https://roadmap.sh/react)
+- [node.ScrollIntoView](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView)
+- [node.nexteElementSibling](https://developer.mozilla.org/es/docs/Web/API/Element/nextElementSibling)
+- [Referenciar elementos con Ref](https://es.react.dev/learn/referencing-values-with-refs)
+- [Manipular el DOM con Refs](https://es.react.dev/learn/manipulating-the-dom-with-refs)
+- [Efectos con useEffect](https://es.react.dev/learn/synchronizing-with-effects)

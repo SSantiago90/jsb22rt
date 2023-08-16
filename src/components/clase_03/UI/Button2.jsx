@@ -4,8 +4,6 @@ import { useState } from "react";
 function ButtonChilds({ onTouch, color = "#050505", children = "Click aquí" }) {
   const [colorState, setColorState] = useState(color);
 
-  console.log("Fuí renderizado");
-
   let styleBtn = {
     backgroundColor: colorState,
   };
