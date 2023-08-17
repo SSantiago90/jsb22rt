@@ -1,17 +1,17 @@
 import "./App.css";
 import ButtonChilds from "./components/clase_03/UI/Button2";
 import BlogContainer from "./components/clase_03/Blog/BlogContainer";
-import ImageClass from "./components/clase_02/Image_class";
 import Counter from "./components/clase_03/UI/Counter";
 import TodoList from "./components/clase_03/TodoList/TodoList";
 import { useState } from "react";
-import LoginForm from "./components/clase_04/LoginForm";
+import LoginForm from "./components/clase_06/LoginForm";
 import Chat from "./components/clase_05/Chat";
 import Timer from "./components/clase_05/Timer";
+import RegisterForm from "./components/clase_06/RegisterForm";
 
 function App() {
   const [hideCounter, setHideCounter] = useState(false);
-  const [activePage, setActivePage] = useState("home");
+  const [activePage, setActivePage] = useState("register");
 
   function handleHideCounter() {
     setHideCounter(!hideCounter);
@@ -20,6 +20,8 @@ function App() {
   function handlePageChange(page) {
     setActivePage(page);
   }
+
+  if (activePage === "login") return <LoginForm />;
 
   if (activePage === "blog") {
     return (
@@ -133,15 +135,12 @@ function App() {
 
         <BlogContainer />
         <TodoList />
-        <ButtonChilds
-          onTouch={() => console.log("modificando color con state")}
-        >
-          Cambio de color
-        </ButtonChilds>
+
         {hideCounter === false && <Counter max={6} />}
         <ButtonChilds onTouch={handleHideCounter}>
           Ocultar contador
         </ButtonChilds>
+
         <Timer />
       </>
     );
@@ -149,6 +148,10 @@ function App() {
 
   if (activePage === "login") {
     return <LoginForm />;
+  }
+
+  if (activePage === "register") {
+    return <RegisterForm />;
   }
 
   return <h1>No encontramos lo que buscabas</h1>;
