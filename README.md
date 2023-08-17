@@ -33,3 +33,10 @@
 - [Referenciar elementos con Ref](https://es.react.dev/learn/referencing-values-with-refs)
 - [Manipular el DOM con Refs](https://es.react.dev/learn/manipulating-the-dom-with-refs)
 - [Efectos con useEffect](https://es.react.dev/learn/synchronizing-with-effects)
+
+### Clase 6
+
+- [Expresiones Regulares online](https://regexr.com/3e48o)
+- [Tutorial Expresiones Regulares](https://regexone.com/references/javascript)
+- [Forms en React](https://es.legacy.reactjs.org/docs/forms.html)
+- [Elementos de Forms](https://es.react.dev/reference/react-dom/components#form-components)

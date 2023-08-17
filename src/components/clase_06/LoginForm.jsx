@@ -54,14 +54,16 @@ function LoginForm() {
 
   return (
     <form onSubmit={handleAuthUser}>
-      <label htmlFor="email">Email</label>
-      <input
-        ref={userInputRef}
-        type="email"
-        name="email"
-        placeholder="Nombre de usuario"
-      ></input>
-      <br />
+      <label htmlFor="email">
+        Email
+        <input
+          ref={userInputRef}
+          type="email"
+          name="email"
+          placeholder="Nombre de usuario"
+        ></input>
+      </label>
+
       <label>
         Contraseña
         <input
@@ -71,7 +73,6 @@ function LoginForm() {
           placeholder="****"
         ></input>
       </label>
-      <br />
 
       <button type="submit">Login</button>
       <button type="reset">Cancelar</button>

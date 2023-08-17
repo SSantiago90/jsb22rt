@@ -1,6 +1,7 @@
 import "./App.css";
 import ButtonChilds from "./components/clase_03/UI/Button2";
-import BlogContainer from "./components/clase_03/Blog/BlogContainer";
+/* import BlogContainer from "./components/clase_03/Blog/BlogContainer"; */
+import BlogContainer from "./components/clase_06/BlogContainer";
 import Counter from "./components/clase_03/UI/Counter";
 import TodoList from "./components/clase_03/TodoList/TodoList";
 import { useState } from "react";
@@ -11,7 +12,7 @@ import RegisterForm from "./components/clase_06/RegisterForm";
 
 function App() {
   const [hideCounter, setHideCounter] = useState(false);
-  const [activePage, setActivePage] = useState("register");
+  const [activePage, setActivePage] = useState("blog");
 
   function handleHideCounter() {
     setHideCounter(!hideCounter);

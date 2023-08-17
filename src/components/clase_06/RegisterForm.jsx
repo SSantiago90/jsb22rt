@@ -1,27 +1,50 @@
 import "./loginform.css";
 import { useState } from "react";
+import formInputsData from "./form.json";
+
+import FormInput from "./FormInput";
 
 function APIauthUser(userdata) {
-  if (userdata.email !== "" && userdata.password !== "") {
+  if (
+    userdata.email !== "" &&
+    userdata.password !== "" &&
+    userdata.birthday !== "" &&
+    userdata["password-confirm"] !== ""
+  ) {
     /* Validacion de datos de usuario */
     /* res.status.200... */
     console.log("Usuario autenticado");
     return { status: "ok" };
   } else {
-    return { code: 403, status: "error", message: "Datos no válidos" };
+    return {
+      code: 403,
+      status: "error",
+      message: "Datos no válidos desde API",
+    };
   }
 }
 
 function RegisterForm() {
+  console.log(formInputsData);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     birthday: "",
   });
+  const [errorsForm, setErrorsForm] = useState(null);
+  const [submitedForm, setSubmitedForm] = useState(false);
 
   // Form CONTROLADO
-  function handleAuthUser() {
-    APIauthUser(formData);
+  function handleAuthUser(evt) {
+    evt.preventDefault();
+    const response = APIauthUser(formData);
+    if (response.status !== "ok") {
+      setErrorsForm(response.message);
+    } else {
+      alert("Login existoso!!!");
+      setErrorsForm(null);
+      setSubmitedForm(true);
+    }
   }
 
   function handleInputChange(evt) {
@@ -33,64 +56,16 @@ function RegisterForm() {
     setFormData(newFormData);
   }
 
-  let errors = [];
-
-  if (formData.email.includes("@") === false) {
-    errors.push({
-      type: "email",
-      text: "Debes ingresar un email válido",
-    });
+  if (submitedForm) {
+    return <h2>Gracias por registrarte</h2>;
   }
-
-  if (formData.password.length < 6) {
-    errors = [
-      ...errors,
-      {
-        type: "password",
-        text: "Tu contraseña necesita más de 6 caracteres.",
-      },
-    ];
-  }
-
-  console.log(errors);
 
   return (
     <form onSubmit={handleAuthUser}>
-      <label htmlFor="email">Email</label>
-      <input
-        onChange={handleInputChange}
-        type="email"
-        name="email"
-        placeholder="Email"
-      ></input>
-      <br />
-      <label>
-        Contraseña
-        <input
-          onChange={handleInputChange}
-          type="password"
-          name="password"
-          placeholder="****"
-        ></input>
-      </label>
-      <br />
-      <label>
-        Fecha de nacimiento
-        <input
-          className=""
-          onChange={handleInputChange}
-          type="date"
-          name="birthday"
-        ></input>
-      </label>
-      <br />
-      <div className="form_errors">
-        {errors.map((err) => (
-          <small style={{ display: "block", color: "red" }} key={err.type}>
-            {err.text}
-          </small>
-        ))}
-      </div>
+      {formInputsData.map((elem) => (
+        <FormInput onChange={handleInputChange} key={elem.name} {...elem} />
+      ))}
+      {errorsForm ? <span className="input_errors">{errorsForm}</span> : <></>}
       <button type="submit">Registrarse</button>
       <button type="reset">Cancelar</button>
     </form>
