@@ -40,3 +40,10 @@
 - [Tutorial Expresiones Regulares](https://regexone.com/references/javascript)
 - [Forms en React](https://es.legacy.reactjs.org/docs/forms.html)
 - [Elementos de Forms](https://es.react.dev/reference/react-dom/components#form-components)
+
+### Clase 7
+
+- [Fakestore Api](https://fakestoreapi.com/)
+- [PokeAPI](https://pokeapi.co/)
+- [Giphy Docs](https://developers.giphy.com/docs/api/#quick-start-guide)
+- [Fetch](https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Using_Fetch)
