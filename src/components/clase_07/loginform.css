@@ -1,0 +1,14 @@
+input.focus:invalid {
+  border: solid 2px red;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.input_errors {
+  font-size: 10px;
+  color: red;
+}

@@ -5,14 +5,17 @@ import BlogContainer from "./components/clase_06/BlogContainer";
 import Counter from "./components/clase_03/UI/Counter";
 import TodoList from "./components/clase_03/TodoList/TodoList";
 import { useState } from "react";
-import LoginForm from "./components/clase_06/LoginForm";
+import LoginForm from "./components/clase_07/LoginForm";
 import Chat from "./components/clase_05/Chat";
 import Timer from "./components/clase_05/Timer";
-import RegisterForm from "./components/clase_06/RegisterForm";
+import RegisterForm from "./components/clase_07/RegisterFormApi";
+import Store from "./components/clase_07/Store";
+import GifsContainer from "./components/clase_07/GifsContainer";
+import EditProfile from "./components/clase_07/EditProfile";
 
 function App() {
   const [hideCounter, setHideCounter] = useState(false);
-  const [activePage, setActivePage] = useState("blog");
+  const [activePage, setActivePage] = useState("profile");
 
   function handleHideCounter() {
     setHideCounter(!hideCounter);
@@ -22,6 +25,16 @@ function App() {
     setActivePage(page);
   }
 
+  if (activePage === "profile") {
+    return <EditProfile />;
+  }
+  if (activePage === "gifs") {
+    return <GifsContainer />;
+  }
+
+  if (activePage === "store") {
+    return <Store />;
+  }
   if (activePage === "login") return <LoginForm />;
 
   if (activePage === "blog") {

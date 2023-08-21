@@ -150,7 +150,7 @@ function getBlogData(limit = 1) {
   return blogPostList.slice(0, limit);
 }
 
-function searchBlogPosts(searchword) {
+function searchBlogPosts(searchword = "") {
   const blogPostList = [
     {
       id: 1,
@@ -298,6 +298,10 @@ function searchBlogPosts(searchword) {
       body: <h3>Post relleno</h3>,
     },
   ];
+
+  if (!searchword) {
+    return [];
+  }
 
   return blogPostList.filter((post) =>
     post.title.toLowerCase().includes(searchword.toLowerCase())

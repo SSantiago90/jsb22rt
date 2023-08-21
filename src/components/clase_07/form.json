@@ -1,0 +1,29 @@
+[
+  {
+    "name": "email",
+    "type": "email",
+    "label": "Correo electrónico",
+    "pattern": "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$",
+    "error": "Tu email no corresponde a un formato válido"
+  },
+  {
+    "name": "password",
+    "type": "password_",
+    "label": "Contraseña",
+    "pattern": "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$",
+    "error": "Tu contraseña debe tener mayúsculas, minúsculas, un número y más de 8 caracteres."
+  },
+  {
+    "name": "password-confirm",
+    "type": "password_",
+    "label": "Confirmar Contraseña",
+    "pattern": "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$",
+    "error": "Tus contraseñas deben coincidir"
+  },
+  {
+    "name": "birthday",
+    "type": "date",
+    "label": "Fecha de Nacimiento",
+    "error": "Necesitas ingresar una fecha de nacimiento válida."
+  }
+]
