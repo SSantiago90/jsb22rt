@@ -47,13 +47,17 @@ function BlogPost({ title, tags = [], favorite = false, footer, children }) {
       {children}
       <div className="blogpost_footer">
         {footer}
-        <br />
-        <button onClick={handleAddToFavorites}>Agregar a favoritos</button>
-        <br />
-        <button onClick={handleNext}>Siguiente</button>
-        <small>
-          <i>Gracias por leernos. BlogReact2023.</i>
-        </small>
+        <div>
+          <button onClick={handleAddToFavorites}>Agregar a favoritos</button>
+        </div>
+        <div>
+          <button onClick={handleNext}>Siguiente</button>
+        </div>
+        <div>
+          <small>
+            <i>Gracias por leernos. BlogReact2023.</i>
+          </small>
+        </div>
       </div>
     </article>
   );

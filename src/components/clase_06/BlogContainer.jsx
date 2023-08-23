@@ -64,7 +64,9 @@ function BlogContainer() {
           </BlogPost>
         </>
       ))}
-      <button onClick={handleFetchPosts}>Cargar Más</button>
+      <div>
+        <button onClick={handleFetchPosts}>Cargar Más</button>
+      </div>  
     </div>
   );
 }

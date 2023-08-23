@@ -1,174 +1,76 @@
 import "./App.css";
-import ButtonChilds from "./components/clase_03/UI/Button2";
 /* import BlogContainer from "./components/clase_03/Blog/BlogContainer"; */
 import BlogContainer from "./components/clase_06/BlogContainer";
-import Counter from "./components/clase_03/UI/Counter";
-import TodoList from "./components/clase_03/TodoList/TodoList";
+import TodoList from "./components/clase_08/TodoList";
 import { useState } from "react";
 import LoginForm from "./components/clase_07/LoginForm";
-import Chat from "./components/clase_05/Chat";
-import Timer from "./components/clase_05/Timer";
 import RegisterForm from "./components/clase_07/RegisterFormApi";
+import NavMenu from "./components/clase_08/NavMenu";
+import Counter from "./components/clase_08/Counter";
 import Store from "./components/clase_07/Store";
-import GifsContainer from "./components/clase_07/GifsContainer";
-import EditProfile from "./components/clase_07/EditProfile";
 
 function App() {
-  const [hideCounter, setHideCounter] = useState(false);
-  const [activePage, setActivePage] = useState("profile");
-
-  function handleHideCounter() {
-    setHideCounter(!hideCounter);
-  }
+  const [activePage, setActivePage] = useState("home");
 
   function handlePageChange(page) {
     setActivePage(page);
   }
 
-  if (activePage === "profile") {
-    return <EditProfile />;
-  }
-  if (activePage === "gifs") {
-    return <GifsContainer />;
-  }
+  const pages = [
+    {
+      name: "home",
+      content: <BlogContainer />,
+      label: "Homepage",
+    },
+    {
+      name: "blog",
+      content: <BlogContainer />,
+      label: "Blog",
+    },
+    {
+      name: "todolist",
+      content: <TodoList />,
+      label: "Tareas",
+    },
+    {
+      name: "login",
+      content: <LoginForm />,
+      label: "Inicia sesión",
+    },
+    {
+      name: "register",
+      content: <RegisterForm />,
+      label: "Registrate",
+    },
+    {
+      name: "counter",
+      content: <Counter />,
+      label: "Contador",
+    },
+    {
+      name: "store",
+      content: <Store />,
+      label: "Tienda",
+    },
+  ];
 
-  if (activePage === "store") {
-    return <Store />;
-  }
-  if (activePage === "login") return <LoginForm />;
+  const activeContent = pages.find((route) => route.name === activePage);
 
-  if (activePage === "blog") {
-    return (
-      <div>
-        <BlogContainer />
-        <ButtonChilds
-          onTouch={() => {
-            handlePageChange("home");
-          }}
-        >
-          Volver
-        </ButtonChilds>
-      </div>
-    );
-  }
+  return (
+    <Layout onPageChange={handlePageChange} pages={pages}>
+      {activeContent.content}
+    </Layout>
+  );
+}
 
-  if (activePage === "todolist") {
-    return (
-      <div>
-        <TodoList />
-        <ButtonChilds
-          onTouch={() => {
-            handlePageChange("home");
-          }}
-        >
-          Volver
-        </ButtonChilds>
-      </div>
-    );
-  }
-
-  if (activePage === "chat") {
-    return (
-      <div>
-        <h1>Chat</h1>
-        <Chat></Chat>
-        <ButtonChilds
-          onTouch={() => {
-            handlePageChange("home");
-          }}
-        >
-          Volver
-        </ButtonChilds>
-      </div>
-    );
-  }
-
-  if (activePage === "home") {
-    return (
-      <>
-        <nav>
-          <ul>
-            <li>
-              <ButtonChilds
-                onTouch={() => {
-                  handlePageChange("home");
-                }}
-              >
-                Homepage
-              </ButtonChilds>
-            </li>
-            <li>
-              <ButtonChilds
-                onTouch={() => {
-                  handlePageChange("chat");
-                }}
-              >
-                Chat
-              </ButtonChilds>
-            </li>
-            <li>
-              <ButtonChilds
-                onTouch={() => {
-                  handlePageChange("blog");
-                }}
-              >
-                Blog
-              </ButtonChilds>
-            </li>
-            <li>
-              <ButtonChilds
-                onTouch={() => {
-                  handlePageChange("todolist");
-                }}
-              >
-                Todo List
-              </ButtonChilds>
-            </li>
-            <li>
-              <ButtonChilds
-                onTouch={() => {
-                  handlePageChange("asdsda");
-                }}
-              >
-                No existe
-              </ButtonChilds>
-            </li>
-            <li>
-              <ButtonChilds
-                onTouch={() => {
-                  handlePageChange("login");
-                }}
-              >
-                Login
-              </ButtonChilds>
-            </li>
-          </ul>
-        </nav>
-
-        <h1>Clase 4 Eventos & Renderizado Condicional</h1>
-
-        <BlogContainer />
-        <TodoList />
-
-        {hideCounter === false && <Counter max={6} />}
-        <ButtonChilds onTouch={handleHideCounter}>
-          Ocultar contador
-        </ButtonChilds>
-
-        <Timer />
-      </>
-    );
-  }
-
-  if (activePage === "login") {
-    return <LoginForm />;
-  }
-
-  if (activePage === "register") {
-    return <RegisterForm />;
-  }
-
-  return <h1>No encontramos lo que buscabas</h1>;
+function Layout({ children, onPageChange, pages = [] }) {
+  return (
+    <main>
+      <NavMenu onPageChange={onPageChange} pages={pages} />
+      {children}
+      <button>Volver</button>
+    </main>
+  );
 }
 
 export default App;

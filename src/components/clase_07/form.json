@@ -2,8 +2,8 @@
   {
     "name": "email",
     "type": "email",
-    "label": "Correo electrónico",
-    "pattern": "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$",
+    "label": "Correo",
+    "pattern": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$",
     "error": "Tu email no corresponde a un formato válido"
   },
   {

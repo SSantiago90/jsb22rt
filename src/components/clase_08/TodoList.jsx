@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { memo, useState, useMemo, useCallback } from "react"; // memo -> HOC -> high order component
 import PropTypes from "prop-types";
-import ButtonChilds from "../UI/Button2";
+import ButtonChilds from "../clase_03/UI/Button2";
 import "./todolist.css";
+import FormAddTodo from "./FormAddTodo";
 
 function TodoList() {
+  const [newTaskText, setNewTaskText] = useState("");
+
   const [tasks, setTasks] = useState([
     { id: 3, text: "Recapitulación de contenido", completed: false },
     {
@@ -13,6 +16,7 @@ function TodoList() {
     },
   ]);
 
+  // useCallback
   function toggleTaskComplete(id) {
     const taskToEdit = tasks.findIndex((task) => task.id === id);
     const newTask = [...tasks];
@@ -20,8 +24,22 @@ function TodoList() {
     setTasks(newTask);
   }
 
+  const memoizedToggle = useCallback(toggleTaskComplete, []);
+
   function RemoveTask(idRemove) {
     setTasks(tasks.filter((task) => task.id !== idRemove));
+  }
+
+  function addTask() {
+    console.log("agregamos tarea");
+    setTasks([
+      ...tasks,
+      { id: tasks.length + 1, text: newTaskText, completed: false },
+    ]);
+  }
+
+  function handleInputChange(evt) {
+    setNewTaskText(evt.target.value);
   }
 
   return (
@@ -33,11 +51,12 @@ function TodoList() {
         <ul className="tasklist_list">
           {tasks.map((task) => (
             <div key={task.id} className="tasklist_item">
-              <Task
-                onClick={() => toggleTaskComplete(task.id)}
+              <MemoizedTask
+                onClick={memoizedToggle}
                 text={task.text}
                 completed={task.completed}
               />
+
               {task.completed && (
                 <ButtonChilds
                   color="crimson"
@@ -50,13 +69,28 @@ function TodoList() {
           ))}
         </ul>
       )}
+      <FormAddTodo onSubmitTask={addTask} onInputChange={handleInputChange} />
     </div>
   );
 }
 
-function Task({ onClick, text, completed = true }) {
+const MemoizedTask = memo(Task);
+
+function Task({ text, completed = true, onClick }) {
+  /* Tarea de uso intensivo del CPU */
+  /* Calculos matemáticos, encryp, canvas */
+  const memoizedBignumber = useMemo(() => {
+    let bignumber = 0;
+    for (let i = 0; i < 2000000000; i++) {
+      bignumber++;
+    }
+    return bignumber;
+  }, []);
+
+  console.log("Termine de contar", memoizedBignumber);
+
   return (
-    <li className={completed ? "completed" : ""} onClick={onClick}>
+    <li onClick={onClick} className={completed ? "completed" : ""}>
       {text}
     </li>
   );

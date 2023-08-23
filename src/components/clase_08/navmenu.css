@@ -1,0 +1,39 @@
+.nav_main {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+}
+
+.nav_logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ce76e9;
+  margin-right: 40px;
+}
+
+.nav_menu {
+  margin-left: 40px;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  gap: 24px;
+}
+
+.nav_menu li {
+  cursor: pointer;
+  align-self: center;
+}
+
+.nav_menu li:hover {
+  color: #ce76e9;
+}
+
+a {
+  font-weight: 500;
+  color: #ce76e9;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #af3ed2;
+}

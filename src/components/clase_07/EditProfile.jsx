@@ -11,7 +11,7 @@ function EditProfile() {
       body: JSON.stringify({ otracosa: "holamundo" }),
     };
 
-    const reponse = await fetch("http://localhost:3001/api/private", config); // endpoint privado
+    const reponse = await fetch("http://localhost:3001/api/upload", config); // endpoint privado
     const json = await reponse.json();
     console.log(json);
   }

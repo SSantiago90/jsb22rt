@@ -57,14 +57,23 @@ function RegisterForm() {
   }
 
   return (
-    <form onSubmit={handleAuthUser}>
-      {formInputsData.map((elem) => (
-        <FormInput onChange={handleInputChange} key={elem.name} {...elem} />
-      ))}
-      {errorsForm ? <span className="input_errors">{errorsForm}</span> : <></>}
-      <button type="submit">Registrarse</button>
-      <button type="reset">Cancelar</button>
-    </form>
+    <div className="form_container">
+      <form onSubmit={handleAuthUser}>
+        <div className="form_header">
+          <h2>Registrarse</h2>
+        </div>
+        {formInputsData.map((elem) => (
+          <FormInput onChange={handleInputChange} key={elem.name} {...elem} />
+        ))}
+        {errorsForm ? (
+          <span className="input_errors">{errorsForm}</span>
+        ) : (
+          <></>
+        )}
+        <button type="submit">Registrarse</button>
+        <button type="reset">Cancelar</button>
+      </form>
+    </div>
   );
 }
 
