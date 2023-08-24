@@ -2,19 +2,49 @@ import "./App.css";
 /* import BlogContainer from "./components/clase_03/Blog/BlogContainer"; */
 import BlogContainer from "./components/clase_06/BlogContainer";
 import TodoList from "./components/clase_08/TodoList";
-import { useState } from "react";
-import LoginForm from "./components/clase_07/LoginForm";
+import { useContext } from "react";
 import RegisterForm from "./components/clase_07/RegisterFormApi";
 import NavMenu from "./components/clase_08/NavMenu";
 import Counter from "./components/clase_08/Counter";
 import Store from "./components/clase_07/Store";
 
-function App() {
-  const [activePage, setActivePage] = useState("home");
+import sessionContext, { SessionProvider } from "./context/sessionContext";
+import routesContext, {
+  RoutesProvider,
+  useRoutesContext,
+} from "./context/routesContext";
+import LoginForm from "./components/clase_07/LoginForm";
 
-  function handlePageChange(page) {
-    setActivePage(page);
-  }
+// Enrutador
+function App() {
+  return (
+    <>
+      {/*  Damos acceso al contexto a través del Provider */}
+      <RoutesProvider>
+        <SessionProvider>
+          <Layout />
+        </SessionProvider>
+      </RoutesProvider>
+    </>
+  );
+}
+
+function Layout() {
+  const context = useContext(sessionContext);
+  const { logged } = context;
+  const { activePage } = useContext(routesContext);
+
+  const logginPage = logged
+    ? {
+        name: "logout",
+        content: <Logout />,
+        label: "Cerrar sesión",
+      }
+    : {
+        name: "login",
+        content: <LoginForm />,
+        label: "Iniciar sesión",
+      };
 
   const pages = [
     {
@@ -33,11 +63,6 @@ function App() {
       label: "Tareas",
     },
     {
-      name: "login",
-      content: <LoginForm />,
-      label: "Inicia sesión",
-    },
-    {
       name: "register",
       content: <RegisterForm />,
       label: "Registrate",
@@ -52,24 +77,37 @@ function App() {
       content: <Store />,
       label: "Tienda",
     },
+    { ...logginPage },
   ];
 
   const activeContent = pages.find((route) => route.name === activePage);
 
   return (
-    <Layout onPageChange={handlePageChange} pages={pages}>
+    <main>
+      <NavMenu pages={pages} />
       {activeContent.content}
-    </Layout>
+      <button>Volver</button>
+    </main>
   );
 }
 
-function Layout({ children, onPageChange, pages = [] }) {
+function Logout() {
+  const { handleLogout } = useContext(sessionContext);
+  const { handlePageChange } = useRoutesContext();
   return (
-    <main>
-      <NavMenu onPageChange={onPageChange} pages={pages} />
-      {children}
-      <button>Volver</button>
-    </main>
+    <h3>
+      Cerrar sesión
+      <div>
+        <button
+          onClick={() => {
+            handleLogout();
+            handlePageChange("home");
+          }}
+        >
+          Confirmar
+        </button>
+      </div>
+    </h3>
   );
 }
 

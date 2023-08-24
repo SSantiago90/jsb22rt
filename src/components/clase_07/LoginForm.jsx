@@ -1,16 +1,21 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import "./loginform.css";
+import sessionContext from "../../context/sessionContext";
+import { useRoutesContext } from "../../context/routesContext";
 
 function LoginForm() {
-  const [login, setLogin] = useState(false);
   const [feedbackMsg, setFeedbackMsg] = useState("");
+
+  // consumimos el Context
+  const { logged, handleLogin } = useContext(sessionContext);
+  // consumir el context de rutas
+  const { handlePageChange } = useRoutesContext();
 
   const userInputRef = useRef();
   const passwordInputRef = useRef();
 
   async function handleAuthUser(evt) {
     evt.preventDefault();
-    console.log("Refs:", passwordInputRef, userInputRef);
     const password = passwordInputRef.current;
     const email = userInputRef.current;
 
@@ -18,8 +23,6 @@ function LoginForm() {
       password: password.value,
       email: email.value,
     };
-
-    // ramiro@mail.com aaaAAA11
 
     const response = await fetch("http://localhost:3001/api/login", {
       method: "POST",
@@ -31,15 +34,17 @@ function LoginForm() {
 
     const jsonData = await response.json();
 
-    window.localStorage.setItem("jwt", jsonData.jwt);
-
-    setLogin(true);
-
-    if (response.ok) setFeedbackMsg("Iniciaste sesión");
-    else setFeedbackMsg("Error al autenticarte");
+    if (response.ok) {
+      handleLogin({
+        auth: jsonData.auth,
+        email: jsonData.email,
+        token: jsonData.jwt,
+      });
+      handlePageChange("todolist");
+    } else setFeedbackMsg("Error al autenticarte");
   }
 
-  if (login) return <h2>{feedbackMsg}</h2>;
+  if (logged) return <h2>{feedbackMsg}</h2>;
 
   return (
     <form onSubmit={handleAuthUser}>
@@ -65,6 +70,7 @@ function LoginForm() {
 
       <button type="submit">Login</button>
       <button type="reset">Cancelar</button>
+      {feedbackMsg ? <small>{feedbackMsg}</small> : <></>}
     </form>
   );
 }

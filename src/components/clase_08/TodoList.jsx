@@ -1,20 +1,32 @@
-import { memo, useState, useMemo, useCallback } from "react"; // memo -> HOC -> high order component
+import {
+  memo,
+  useState,
+  useMemo,
+  useCallback,
+  useEffect,
+  useContext,
+} from "react"; // memo -> HOC -> high order component
 import PropTypes from "prop-types";
 import ButtonChilds from "../clase_03/UI/Button2";
 import "./todolist.css";
 import FormAddTodo from "./FormAddTodo";
+import { v4 as uuid } from "uuid";
+import sessionContext from "../../context/sessionContext";
 
 function TodoList() {
   const [newTaskText, setNewTaskText] = useState("");
+  const [tasks, setTasks] = useState([]);
 
-  const [tasks, setTasks] = useState([
-    { id: 3, text: "Recapitulación de contenido", completed: false },
-    {
-      id: 2,
-      text: "Limpieza de proyecto y revisión de errores",
-      completed: false,
-    },
-  ]);
+  const { logged } = useContext(sessionContext);
+
+  useEffect(() => {
+    async function getData() {
+      const response = await fetch("http://localhost:3001/api/tasks");
+      const data = await response.json();
+      setTasks(data);
+    }
+    getData();
+  }, []);
 
   // useCallback
   function toggleTaskComplete(id) {
@@ -24,18 +36,38 @@ function TodoList() {
     setTasks(newTask);
   }
 
-  const memoizedToggle = useCallback(toggleTaskComplete, []);
+  const memoizedToggle = useCallback(toggleTaskComplete, [tasks]);
+
+  if (logged === false) {
+    return <h1>No estas logueado</h1>;
+  }
 
   function RemoveTask(idRemove) {
     setTasks(tasks.filter((task) => task.id !== idRemove));
   }
 
-  function addTask() {
+  // Cambio de estado sincrono
+  /* function addTask() {
     console.log("agregamos tarea");
-    setTasks([
-      ...tasks,
-      { id: tasks.length + 1, text: newTaskText, completed: false },
-    ]);
+    setTasks([...tasks, { id: uuid(), text: newTaskText, completed: false }]);
+  } */
+
+  async function addTask() {
+    const endpoint = "http://localhost:3001/api/tasks";
+
+    const response = await fetch(endpoint, {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "bearer " + window.localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({ text: newTaskText, completed: false }),
+    });
+
+    const data = await response.json();
+    const formatedTask = { id: data.id, text: data.text, completed: false };
+    setTasks([...tasks, formatedTask]);
   }
 
   function handleInputChange(evt) {
@@ -55,6 +87,7 @@ function TodoList() {
                 onClick={memoizedToggle}
                 text={task.text}
                 completed={task.completed}
+                id={task.id}
               />
 
               {task.completed && (
@@ -76,12 +109,12 @@ function TodoList() {
 
 const MemoizedTask = memo(Task);
 
-function Task({ text, completed = true, onClick }) {
+function Task({ text, completed = true, onClick, id }) {
   /* Tarea de uso intensivo del CPU */
   /* Calculos matemáticos, encryp, canvas */
   const memoizedBignumber = useMemo(() => {
     let bignumber = 0;
-    for (let i = 0; i < 2000000000; i++) {
+    for (let i = 0; i < 1000000000; i++) {
       bignumber++;
     }
     return bignumber;
@@ -90,7 +123,7 @@ function Task({ text, completed = true, onClick }) {
   console.log("Termine de contar", memoizedBignumber);
 
   return (
-    <li onClick={onClick} className={completed ? "completed" : ""}>
+    <li onClick={() => onClick(id)} className={completed ? "completed" : ""}>
       {text}
     </li>
   );

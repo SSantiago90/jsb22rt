@@ -18,8 +18,6 @@ function RegisterForm() {
   async function handleAuthUser(evt) {
     evt.preventDefault();
 
-    console.log(JSON.stringify(formData));
-
     const response = await fetch("http://localhost:3001/api/users", {
       method: "POST",
       body: JSON.stringify(formData),
@@ -34,8 +32,8 @@ function RegisterForm() {
     const jsonData = await response.json();
     console.log(jsonData);
 
-    if (response.status !== "ok") {
-      setErrorsForm(response.message);
+    if (response.ok === false) {
+      setErrorsForm(jsonData.error);
     } else {
       alert("Login existoso!!!");
       setErrorsForm(null);
