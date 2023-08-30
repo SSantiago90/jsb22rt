@@ -1,0 +1,17 @@
+.products-list {
+  padding: 20px 80px;
+}
+
+.products-list__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  gap: 100px 48px;
+}
+
+.product-card {
+  background-color: white;
+  color: #222222;
+  border-radius: 5px;
+  text-align: center;
+  padding: 12px 32px;
+}

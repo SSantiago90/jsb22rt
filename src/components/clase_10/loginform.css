@@ -1,0 +1,33 @@
+.form_container {
+  background-color: #101010;
+  border-radius: 5px;
+  padding: 24px 48px 48px;
+}
+
+form.form_header {
+  margin-bottom: 24px;
+}
+input.focus:invalid {
+  border: solid 2px red;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+form .input_group {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.input_errors {
+  font-size: 10px;
+  color: red;
+}
+
+input {
+  margin-left: 12px;
+}

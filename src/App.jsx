@@ -1,114 +1,89 @@
-import "./App.css";
-/* import BlogContainer from "./components/clase_03/Blog/BlogContainer"; */
-import BlogContainer from "./components/clase_06/BlogContainer";
-import TodoList from "./components/clase_08/TodoList";
-import { useContext } from "react";
-import RegisterForm from "./components/clase_07/RegisterFormApi";
-import NavMenu from "./components/clase_08/NavMenu";
-import Counter from "./components/clase_08/Counter";
-import Store from "./components/clase_07/Store";
-
+import DetailContainer from "./components/clase_10/DetailContainer";
+import Login from "./components/clase_10/Login";
+import NavRouter from "./components/clase_10/NavRouter";
+import NestedRoute from "./components/clase_10/NestedRoute";
+import StoreContainer from "./components/clase_10/StoreContainer";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Outlet,
+  Navigate,
+} from "react-router-dom";
 import sessionContext, { SessionProvider } from "./context/sessionContext";
-import routesContext, {
-  RoutesProvider,
-  useRoutesContext,
-} from "./context/routesContext";
-import LoginForm from "./components/clase_07/LoginForm";
+import { useContext } from "react";
 
-// Enrutador
 function App() {
   return (
-    <>
-      {/*  Damos acceso al contexto a través del Provider */}
-      <RoutesProvider>
-        <SessionProvider>
-          <Layout />
-        </SessionProvider>
-      </RoutesProvider>
-    </>
-  );
-}
-
-function Layout() {
-  const context = useContext(sessionContext);
-  const { logged } = context;
-  const { activePage } = useContext(routesContext);
-
-  const logginPage = logged
-    ? {
-        name: "logout",
-        content: <Logout />,
-        label: "Cerrar sesión",
-      }
-    : {
-        name: "login",
-        content: <LoginForm />,
-        label: "Iniciar sesión",
-      };
-
-  const pages = [
-    {
-      name: "home",
-      content: <BlogContainer />,
-      label: "Homepage",
-    },
-    {
-      name: "blog",
-      content: <BlogContainer />,
-      label: "Blog",
-    },
-    {
-      name: "todolist",
-      content: <TodoList />,
-      label: "Tareas",
-    },
-    {
-      name: "register",
-      content: <RegisterForm />,
-      label: "Registrate",
-    },
-    {
-      name: "counter",
-      content: <Counter />,
-      label: "Contador",
-    },
-    {
-      name: "store",
-      content: <Store />,
-      label: "Tienda",
-    },
-    { ...logginPage },
-  ];
-
-  const activeContent = pages.find((route) => route.name === activePage);
-
-  return (
     <main>
-      <NavMenu pages={pages} />
-      {activeContent.content}
-      <button>Volver</button>
+      <SessionProvider>
+        <BrowserRouter>
+          <NavRouter />
+
+          <Routes>
+            <Route path="/" element={<h1>Bienvenidos!</h1>} />
+            <Route path="/store" element={<StoreContainer />} />
+
+            <Route path="/private" element={<PrivateRoute />}>
+              {/* OUTLET */}
+              <Route
+                index
+                element={
+                  <div>
+                    <h2>Ruta Privada</h2>
+                    <small>Si estás aquí entonces iniciaste sesión!🙃</small>
+                  </div>
+                }
+              />
+            </Route>
+
+            <Route
+              path="/store/detail/:idProduct"
+              element={<DetailContainer />}
+            />
+
+            <Route
+              path="/store/detail/123456789"
+              element={<h1>Felicitaciones...</h1>}
+            />
+            <Route
+              path="/store/detail/:idProduct/buy"
+              element={<PrivateRoute />}
+            >
+              <Route index element={<DetailContainer buy={true} />} />
+            </Route>
+
+            <Route path="/login" element={<Login />} />
+
+            <Route path="/nested" element={<NestedRoute />}>
+              <Route index element={<h2>Home</h2>} />
+              <Route path="page1" element={<h3>Page 1</h3>} />
+
+              <Route path="page2" element={<PrivateRoute />}>
+                <Route index element={<h3>Page 2 - Contenido privado</h3>} />
+              </Route>
+            </Route>
+
+            <Route path="*" element={<h1>Page not found: 404</h1>} />
+          </Routes>
+
+          <footer style={{ textAlign: "center" }}>
+            <p>
+              <small>&copy; 2023 - HackABoss</small>
+            </p>
+          </footer>
+        </BrowserRouter>
+      </SessionProvider>
     </main>
   );
 }
 
-function Logout() {
-  const { handleLogout } = useContext(sessionContext);
-  const { handlePageChange } = useRoutesContext();
-  return (
-    <h3>
-      Cerrar sesión
-      <div>
-        <button
-          onClick={() => {
-            handleLogout();
-            handlePageChange("home");
-          }}
-        >
-          Confirmar
-        </button>
-      </div>
-    </h3>
-  );
+function PrivateRoute() {
+  const { logged } = useContext(sessionContext);
+
+  if (!logged) return <Navigate to="/login" />;
+
+  return <Outlet />;
 }
 
 export default App;

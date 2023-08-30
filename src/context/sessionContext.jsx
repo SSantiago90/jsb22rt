@@ -35,7 +35,7 @@ function SessionProvider(props) {
 
   return (
     <sessionContext.Provider
-      value={{ logged, user: "HAB", handleLogin, handleLogout, username }}
+      value={{ logged, handleLogin, handleLogout, username }}
     >
       {props.children}
     </sessionContext.Provider>
