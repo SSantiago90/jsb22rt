@@ -33,9 +33,13 @@ function SessionProvider(props) {
     setUsername("Anónimo");
   }
 
+  function getAuthToken() {
+    return window.localStorage.getItem("jwt");
+  }
+
   return (
     <sessionContext.Provider
-      value={{ logged, handleLogin, handleLogout, username }}
+      value={{ logged, handleLogin, handleLogout, username, getAuthToken }}
     >
       {props.children}
     </sessionContext.Provider>

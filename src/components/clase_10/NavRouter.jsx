@@ -1,5 +1,6 @@
+import CartIcon from "./CartIcon";
 import "./navrouter.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 function NavRouter() {
   return (
@@ -11,15 +12,6 @@ function NavRouter() {
         </li>
         <li className="nav_item">
           <NavLink to="/store">Tienda</NavLink>
-        </li>
-        <li className="nav_item">
-          <NavLink to="/nested">Nested</NavLink>
-        </li>
-        <li className="nav_item">
-          <NavLink to="/nested/page1">Page 1</NavLink>
-        </li>
-        <li className="nav_item">
-          <NavLink to="/nested/page2">Page 2</NavLink>
         </li>
         <li className="nav_item">
           <NavLink to="/login">Login</NavLink>
@@ -34,6 +26,7 @@ function NavRouter() {
             Redes
           </a>
         </li>
+        <CartIcon />
       </ul>
     </nav>
   );
